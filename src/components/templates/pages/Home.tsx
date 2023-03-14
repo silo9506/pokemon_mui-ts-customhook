@@ -3,6 +3,7 @@ import Topnav from "components/molecules/Topnav";
 import { Toolbar, Grid } from "@mui/material";
 import { useState, useEffect } from "react";
 import useAxios from "hooks/useAxios";
+import { Outlet } from "react-router-dom";
 
 interface PokemonListRes {
   count: number;
@@ -20,7 +21,8 @@ const Home = () => {
   const [offset, setOffset] = useState(0);
   const [resList, setResList] = useState<ResListState[]>([]);
   const { response, error, loading, sendData } = useAxios<PokemonListRes>({
-    url: "pokemon",
+    // url: "pokemon",
+    url: "https://pokeapi.co/api/v2/pokemon",
     params: { limite: 151, offset },
   });
 
@@ -46,21 +48,19 @@ const Home = () => {
     setOffset((prev) => prev + 20);
   };
 
-  console.log(response);
-  console.log(resList);
   return (
-    <div>
-      <Topnav />
-      <Toolbar sx={{ marginY: "16px" }} />
-
-      <Grid container spacing={2} columns={{ xs: 12, sm: 16, md: 20 }}>
-        {resList.map(({ url, name }) => (
-          <Grid key={name} item xs={4} sm={4} md={4}>
-            <Card name={name} url={url}></Card>
-          </Grid>
-        ))}
-      </Grid>
-    </div>
+    <Grid
+      container
+      spacing={3}
+      columns={{ xs: 12, sm: 16, md: 20 }}
+      sx={{ paddingX: "16px" }}
+    >
+      {resList.map(({ url, name }) => (
+        <Grid key={name} item xs={4} sm={4} md={4}>
+          <Card name={name} id={url.substring(34).replace("/", "")}></Card>
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 

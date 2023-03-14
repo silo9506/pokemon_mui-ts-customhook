@@ -11,18 +11,30 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { ReactComponent as BlackBall } from "asset/svg/blackBall.svg";
-import { ReactComponent as ColorBall } from "asset/svg/blackBall.svg";
+import { ReactComponent as ColorBall } from "asset/svg/colorBall.svg";
 import { useTheme, useThemeUpdate } from "modules/ThemeContext";
+import { useNavigate } from "react-router-dom";
 const Topnav = () => {
   const { darkTheme } = useTheme();
   const { toggleTheme } = useThemeUpdate();
-
+  const navigate = useNavigate();
   return (
     <>
       <AppBar position="fixed">
         <Toolbar sx={{ display: "flex", alignItems: "center" }}>
-          <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-            <Typography>포켓몬 도감</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+            <Typography
+              sx={{ cursor: "pointer" }}
+              onClick={() => navigate("/")}
+            >
+              포켓몬 도감
+            </Typography>
             {darkTheme ? (
               <div>
                 <IconButton
@@ -31,7 +43,11 @@ const Topnav = () => {
                 >
                   <ColorBall />
                 </IconButton>
-                <Typography variant="caption" display="inline" sx={{ paddingLeft: "8px" }}>
+                <Typography
+                  variant="caption"
+                  display="inline"
+                  sx={{ paddingLeft: "8px" }}
+                >
                   일반모드
                 </Typography>
               </div>
@@ -43,7 +59,11 @@ const Topnav = () => {
                 >
                   <BlackBall />
                 </IconButton>
-                <Typography variant="caption" display="inline" sx={{ paddingLeft: "8px" }}>
+                <Typography
+                  variant="caption"
+                  display="inline"
+                  sx={{ paddingLeft: "8px" }}
+                >
                   다크모드
                 </Typography>
               </div>

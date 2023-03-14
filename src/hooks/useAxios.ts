@@ -6,9 +6,7 @@ type useAxiosProps = {
   params?: object;
 };
 
-const instance = axios.create({
-  baseURL: "https://pokeapi.co/api/v2",
-});
+const instance = axios.create({});
 
 const useAxios = <T>({ url, params }: useAxiosProps) => {
   const [response, setResponse] = useState<any>(null);
