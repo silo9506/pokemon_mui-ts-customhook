@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.js": "/pokemon_mui-ts-customhook/static/js/main.6d78f305.js",
+    "static/media/blackBall.svg": "/pokemon_mui-ts-customhook/static/media/blackBall.5c94e20e10e389c041aa9221f8a6d4d2.svg",
+    "static/media/Psychic.svg": "/pokemon_mui-ts-customhook/static/media/Psychic.4629119dbd282bbc4e7a7656aec67c8b.svg",
+    "static/media/Dragon.svg": "/pokemon_mui-ts-customhook/static/media/Dragon.e243d6f6d27e17dd4e1202787ac4bf79.svg",
+    "static/media/Ghost.svg": "/pokemon_mui-ts-customhook/static/media/Ghost.ef09417b4e38707f66becec61e2a9061.svg",
+    "static/media/Fairy.svg": "/pokemon_mui-ts-customhook/static/media/Fairy.556b990c660e41a30426c7f16b6a65e9.svg",
+    "static/media/colorBall.svg": "/pokemon_mui-ts-customhook/static/media/colorBall.d575cc3df3f29e3ead5ee15c137c0a25.svg",
+    "static/media/Bug.svg": "/pokemon_mui-ts-customhook/static/media/Bug.92cdc9403fad38bf15c0e625e77ac635.svg",
+    "static/media/Fire.svg": "/pokemon_mui-ts-customhook/static/media/Fire.e6d5d5afdc1fa952566568c87d4d1477.svg",
+    "static/media/Dark.svg": "/pokemon_mui-ts-customhook/static/media/Dark.20ab213b6c9e1f93812c49fad54c1106.svg",
+    "static/media/Steel.svg": "/pokemon_mui-ts-customhook/static/media/Steel.1db1f8e691be888ddd59a63827c44eb9.svg",
+    "static/media/Normal.svg": "/pokemon_mui-ts-customhook/static/media/Normal.30869222dc4d8cea368dbe97ebd71869.svg",
+    "static/media/Water.svg": "/pokemon_mui-ts-customhook/static/media/Water.176904dc94dee21919dcdcab2dcebd8b.svg",
+    "static/media/Electric.svg": "/pokemon_mui-ts-customhook/static/media/Electric.ac89c1bc4351a1e410adde7bf25a28ec.svg",
+    "static/media/Flying.svg": "/pokemon_mui-ts-customhook/static/media/Flying.ed93b8395423ca9c330c4bc8fa167f87.svg",
+    "static/media/Ice.svg": "/pokemon_mui-ts-customhook/static/media/Ice.8c96de231b52e7fc6460985937d457b5.svg",
+    "static/media/Poison.svg": "/pokemon_mui-ts-customhook/static/media/Poison.2292cb1ed1c4437d5dd1ba587e876a64.svg",
+    "index.html": "/pokemon_mui-ts-customhook/index.html",
+    "static/media/Ground.svg": "/pokemon_mui-ts-customhook/static/media/Ground.d85adea0ccff965300b7580181b926b8.svg",
+    "static/media/Fighting.svg": "/pokemon_mui-ts-customhook/static/media/Fighting.4261226a63b503114e2f6cbf7212f5f6.svg",
+    "static/media/Rock.svg": "/pokemon_mui-ts-customhook/static/media/Rock.c837fee5d29a9a5dc63cf224ea555f69.svg",
+    "static/media/Grass.svg": "/pokemon_mui-ts-customhook/static/media/Grass.b673cb5a02a0c7e2c037ca04b49471ce.svg",
+    "main.6d78f305.js.map": "/pokemon_mui-ts-customhook/static/js/main.6d78f305.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.6d78f305.js"
+  ]
+}
