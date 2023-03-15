@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/pokemon_mui-ts-customhook/static/js/main.6d78f305.js",
+    "main.js": "/pokemon_mui-ts-customhook/static/js/main.66dae20c.js",
     "static/media/blackBall.svg": "/pokemon_mui-ts-customhook/static/media/blackBall.5c94e20e10e389c041aa9221f8a6d4d2.svg",
     "static/media/Psychic.svg": "/pokemon_mui-ts-customhook/static/media/Psychic.4629119dbd282bbc4e7a7656aec67c8b.svg",
     "static/media/Dragon.svg": "/pokemon_mui-ts-customhook/static/media/Dragon.e243d6f6d27e17dd4e1202787ac4bf79.svg",
@@ -22,9 +22,9 @@
     "static/media/Fighting.svg": "/pokemon_mui-ts-customhook/static/media/Fighting.4261226a63b503114e2f6cbf7212f5f6.svg",
     "static/media/Rock.svg": "/pokemon_mui-ts-customhook/static/media/Rock.c837fee5d29a9a5dc63cf224ea555f69.svg",
     "static/media/Grass.svg": "/pokemon_mui-ts-customhook/static/media/Grass.b673cb5a02a0c7e2c037ca04b49471ce.svg",
-    "main.6d78f305.js.map": "/pokemon_mui-ts-customhook/static/js/main.6d78f305.js.map"
+    "main.66dae20c.js.map": "/pokemon_mui-ts-customhook/static/js/main.66dae20c.js.map"
   },
   "entrypoints": [
-    "static/js/main.6d78f305.js"
+    "static/js/main.66dae20c.js"
   ]
 }
