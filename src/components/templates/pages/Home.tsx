@@ -27,6 +27,19 @@ const Home = () => {
   });
 
   useEffect(() => {
+    const handleScroll = () => {
+      console.log("스크롤중");
+      const { offsetHeight } = document.body;
+      if (window.innerHeight + window.scrollY >= offsetHeight) {
+        // console.log("실행된겨?");
+        sendOffset();
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
     if (!loading) {
       setResList((prev) => {
         // 중복 제거 스테틱모드 아닌데도 response값이 자꾸 2번들어가서 중복값생김..
@@ -41,7 +54,9 @@ const Home = () => {
   }, [response]);
 
   useEffect(() => {
-    sendData();
+    if (!loading) {
+      sendData();
+    }
   }, [offset]);
 
   const sendOffset = () => {
@@ -60,6 +75,7 @@ const Home = () => {
           <Card name={name} id={url.substring(34).replace("/", "")}></Card>
         </Grid>
       ))}
+      {loading && <>로딩</>}
     </Grid>
   );
 };
