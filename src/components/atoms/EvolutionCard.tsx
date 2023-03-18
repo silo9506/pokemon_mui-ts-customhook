@@ -1,6 +1,13 @@
 import useAxios from "hooks/useAxios";
 import { useEffect, useState } from "react";
-import { Card, Box, Paper, CardMedia, Typography } from "@mui/material";
+import {
+  Card,
+  Box,
+  Paper,
+  CardMedia,
+  Typography,
+  Skeleton,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 type EvolutionCardProps = {
   url: string;
@@ -8,6 +15,7 @@ type EvolutionCardProps = {
 
 const EvolutionCard = ({ url }: EvolutionCardProps) => {
   const id = url.split("/")[6];
+  const [sprite, setSprite] = useState<string>("");
   const navigate = useNavigate();
   const {
     response: pokemonspeciesRes,
@@ -26,6 +34,18 @@ const EvolutionCard = ({ url }: EvolutionCardProps) => {
     url: `https://pokeapi.co/api/v2/pokemon/${id}`,
   });
 
+  useEffect(() => {
+    if (!pokemonLoading) {
+      if (pokemonRes.sprites.other.dream_world.front_default === null) {
+        setSprite(
+          `${pokemonRes.sprites.other["official-artwork"].front_default}`
+        );
+      } else {
+        setSprite(pokemonRes.sprites.other.dream_world.front_default);
+      }
+    }
+  }, [pokemonRes]);
+
   const onClick = () => {
     navigate(`/detailePokemon/${id}`, {
       state: { pokemonRes, pokemonspeciesRes },
@@ -34,7 +54,20 @@ const EvolutionCard = ({ url }: EvolutionCardProps) => {
   return (
     <Box sx={{ flex: "1" }}>
       {pokemonLoading || evolutionLoading ? (
-        <div>로딩중</div>
+        <Box>
+          <Skeleton
+            variant="rectangular"
+            width="100%"
+            height="250px"
+            sx={{ padding: "8px" }}
+          />
+          <Skeleton variant="text">
+            <Typography variant="button">No.0000</Typography>
+          </Skeleton>
+          <Skeleton variant="text">
+            <Typography variant="h6">이름입니다.</Typography>
+          </Skeleton>
+        </Box>
       ) : (
         <>
           <Paper
@@ -55,7 +88,7 @@ const EvolutionCard = ({ url }: EvolutionCardProps) => {
                 backgroundPosition: "center",
                 objectFit: "fill",
               }}
-              image={pokemonRes.sprites.other.dream_world.front_default}
+              image={sprite}
             />
           </Paper>
           <Box sx={{ position: "absolute" }}>

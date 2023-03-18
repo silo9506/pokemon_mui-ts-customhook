@@ -1,4 +1,5 @@
 import { Card, Box, CardMedia, Typography, Grid } from "@mui/material";
+import { useEffect, useState } from "react";
 import { ReactComponent as Normal } from "asset/svg/Normal.svg";
 import { ReactComponent as Fire } from "asset/svg/Fire.svg";
 import { ReactComponent as Water } from "asset/svg/Water.svg";
@@ -27,6 +28,17 @@ const PokemonDetaile = ({
   pokemonspeciesRes,
   pokemonRes,
 }: PokemonDetaileProps) => {
+  const [sprite, setSprite] = useState<string>("");
+
+  useEffect(() => {
+    if (pokemonRes.sprites.other.dream_world.front_default === null) {
+      setSprite(pokemonRes.sprites.other.home.front_default);
+    } else {
+      setSprite(pokemonRes.sprites.other.dream_world.front_default);
+    }
+  }, [pokemonRes]);
+
+  console.log(pokemonspeciesRes);
   return (
     <Card
       elevation={3}
@@ -44,7 +56,8 @@ const PokemonDetaile = ({
             objectFit: "fill",
             flex: "1",
           }}
-          image={pokemonRes.sprites.other.dream_world.front_default}
+          // image={pokemonRes.sprites.other.dream_world.front_default}
+          image={sprite}
         />
 
         <Box sx={{ flex: "1", paddingX: "8px" }}>

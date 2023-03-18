@@ -1,6 +1,6 @@
 import Card from "components/atoms/Card";
 import Topnav from "components/molecules/Topnav";
-import { Toolbar, Grid } from "@mui/material";
+import { Toolbar, Grid, CircularProgress, Box } from "@mui/material";
 import { useState, useEffect } from "react";
 import useAxios from "hooks/useAxios";
 import { Outlet } from "react-router-dom";
@@ -19,19 +19,18 @@ type ResListState = {
 
 const Home = () => {
   const [offset, setOffset] = useState(0);
+  const [maxPage, setMaxPage] = useState(875);
   const [resList, setResList] = useState<ResListState[]>([]);
+  const [throttle, setThrottle] = useState(false);
   const { response, error, loading, sendData } = useAxios<PokemonListRes>({
-    // url: "pokemon",
     url: "https://pokeapi.co/api/v2/pokemon",
-    params: { limite: 151, offset },
+    params: { limite: 20, offset },
   });
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log("스크롤중");
       const { offsetHeight } = document.body;
       if (window.innerHeight + window.scrollY >= offsetHeight) {
-        // console.log("실행된겨?");
         sendOffset();
       }
     };
@@ -44,11 +43,15 @@ const Home = () => {
       setResList((prev) => {
         // 중복 제거 스테틱모드 아닌데도 response값이 자꾸 2번들어가서 중복값생김..
         console.log("리스트에 데이터추가");
-        const state = [...prev, ...response.results];
-        const newState = state.filter((prevdata, index, arr) => {
-          return arr.findIndex((data) => prevdata.name === data.name) === index;
-        });
-        return newState;
+        if (response.results !== undefined) {
+          const state = [...prev, ...response.results];
+          const newState = state.filter((prevdata, index, arr) => {
+            return (
+              arr.findIndex((data) => prevdata.name === data.name) === index
+            );
+          });
+          return newState;
+        } else return prev;
       });
     }
   }, [response]);
@@ -59,9 +62,36 @@ const Home = () => {
     }
   }, [offset]);
 
-  const sendOffset = () => {
-    setOffset((prev) => prev + 20);
+  console.log(loading);
+  const useThrottle = (fn: Function, delay: number) => {
+    let onThrottle = throttle;
+    return function () {
+      if (!onThrottle) {
+        fn();
+        onThrottle = true;
+        setThrottle(true);
+        setTimeout(() => {
+          onThrottle = false;
+          setThrottle(false);
+        }, delay);
+      }
+    };
   };
+
+  const sendOffset = useThrottle(() => {
+    setOffset((prev) => {
+      if (prev === maxPage) {
+        return prev;
+      }
+      if (prev === maxPage - 15) {
+        // console.log("+15");
+        return prev + 15;
+      } else {
+        // console.log("+20");
+        return prev + 20;
+      }
+    });
+  }, 1000);
 
   return (
     <Grid
@@ -75,7 +105,18 @@ const Home = () => {
           <Card name={name} id={url.substring(34).replace("/", "")}></Card>
         </Grid>
       ))}
-      {loading && <>로딩</>}
+      {loading && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      )}
     </Grid>
   );
 };

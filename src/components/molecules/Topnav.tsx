@@ -14,10 +14,56 @@ import { ReactComponent as BlackBall } from "asset/svg/blackBall.svg";
 import { ReactComponent as ColorBall } from "asset/svg/colorBall.svg";
 import { useTheme, useThemeUpdate } from "modules/ThemeContext";
 import { useNavigate } from "react-router-dom";
+import { ReactEventHandler, useEffect, useState } from "react";
+import useAxios from "hooks/useAxios";
 const Topnav = () => {
-  const { darkTheme } = useTheme();
+  const darkTheme = useTheme();
   const { toggleTheme } = useThemeUpdate();
   const navigate = useNavigate();
+  const [inputValue, setInputValue] = useState("");
+
+  const {
+    response: pokemonRes,
+    error: pokemonResError,
+    loading: pokemonResLoading,
+    sendData: sendPokemonResData,
+  } = useAxios({
+    url: `https://pokeapi.co/api/v2/pokemon/${inputValue}`,
+  });
+  const {
+    response: pokemonspeciesRes,
+    error: pokemonspeciesResErro,
+    loading: pokemonspeciesResLoading,
+    sendData: sendPokemonspeciesResData,
+  } = useAxios({
+    url: `https://pokeapi.co/api/v2/pokemon-species/${inputValue}`,
+  });
+
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    console.log("서브밋");
+    navigate(`/detailePokemon/${inputValue}`, {
+      state: { pokemonRes, pokemonspeciesRes },
+    });
+    window.location.reload();
+  };
+  useEffect(() => {
+    sendPokemonResData();
+    sendPokemonspeciesResData();
+  }, [inputValue]);
+
+  const onChange = (e: any) => {
+    console.log(e.target.value);
+    if (e.target.value > 895) {
+      return alert("존재하지 않는 도감 번호입니다.");
+    }
+    if (e.target.value === "0") {
+      return setInputValue("");
+    } else {
+      return setInputValue(e.target.value);
+    }
+  };
+
   return (
     <>
       <AppBar position="fixed">
@@ -69,15 +115,19 @@ const Topnav = () => {
               </div>
             )}
           </Box>
-          <Search>
+          <Search onSubmit={onSubmit}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               inputProps={{ maxLength: 20 }}
-              placeholder="이름 또는 도감번호를 입력해주세요"
+              placeholder="도감번호를 입력해주세요"
+              value={inputValue}
+              type="number"
+              required
+              onChange={onChange}
             ></StyledInputBase>
-            <StyledSearchButton>
+            <StyledSearchButton type="submit">
               <SearchIcon />
             </StyledSearchButton>
           </Search>
@@ -87,7 +137,7 @@ const Topnav = () => {
   );
 };
 
-const Search = styled("div")(({ theme }) => ({
+const Search = styled("form")(({ theme }) => ({
   position: "relative",
   display: "flex",
   flex: 1,
